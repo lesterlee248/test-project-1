@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonlight Café</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Moonlight Café</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a class="btn" href="#contact">Reserve a Table</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-text">
+                <p class="tagline">Fresh coffee • Cozy vibes • Warm moments</p>
+                <h1>Welcome to your favorite café spot.</h1>
+                <p>
+                    Sip handcrafted coffee, enjoy homemade pastries, and relax in a warm and welcoming atmosphere.
+                </p>
+                <div class="hero-buttons">
+                    <a class="btn primary" href="#menu">View Menu</a>
+                    <a class="btn secondary" href="#about">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <div class="coffee-image"></div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="section-title">
+                <p>About Us</p>
+                <h2>Crafted for coffee lovers</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        At Moonlight Café, we believe every cup should feel special. From slow mornings to
+                        afternoon breaks, our café is designed for comfort, conversation, and connection.
+                    </p>
+                    <p>
+                        We source high-quality beans, bake fresh pastries daily, and create a space where
+                        people can pause, recharge, and enjoy the little moments.
+                    </p>
+                </div>
+
+                <div class="about-info">
+                    <div class="info-box">
+                        <h3>Open Daily</h3>
+                        <p>7:00 AM - 9:00 PM</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Location</h3>
+                        <p>12 Garden Street, Downtown</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Specialty</h3>
+                        <p>Artisan coffee & brunch</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="menu">
+            <div class="section-title">
+                <p>Our Menu</p>
+                <h2>Fresh flavors every day</h2>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <h3>Signature Coffee</h3>
+                    <p>Espresso, cappuccino, latte, mocha</p>
+                    <span>$4.50</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Cold Brews</h3>
+                    <p>Vanilla cream, caramel, hazelnut</p>
+                    <span>$5.00</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Fresh Pastries</h3>
+                    <p>Croissant, muffin, cinnamon roll</p>
+                    <span>$3.50</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Brunch Favorites</h3>
+                    <p>Avocado toast, eggs benedict, bagel</p>
+                    <span>$9.00</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Tea Collection</h3>
+                    <p>Green tea, chai, herbal infusions</p>
+                    <span>$3.00</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Seasonal Treats</h3>
+                    <p>Chef specials and limited editions</p>
+                    <span>$6.00</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery">
+            <div class="section-title">
+                <p>Gallery</p>
+                <h2>Moments worth savoring</h2>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-card card-one"></div>
+                <div class="gallery-card card-two"></div>
+                <div class="gallery-card card-three"></div>
+                <div class="gallery-card card-four"></div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="section-title">
+                <p>Reviews</p>
+                <h2>What our customers say</h2>
+            </div>
+
+            <div class="testimonial-grid">
+                <blockquote>
+                    “The coffee is amazing, and the atmosphere feels like home.”
+                </blockquote>
+                <blockquote>
+                    “Perfect place for a quiet morning and the pastries are always fresh.”
+                </blockquote>
+                <blockquote>
+                    “Friendly staff, cozy interior, and the best cappuccino in town.”
+                </blockquote>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>Moonlight Café</h3>
+                <p>Your daily dose of comfort and caffeine.</p>
+            </div>
+
+            <div>
+                <h4>Contact</h4>
+                <p>12 Garden Street</p>
+                <p>hello@moonlightcafe.com</p>
+                <p>+1 (555) 123-4567</p>
+            </div>
+
+            <div>
+                <h4>Hours</h4>
+                <p>Mon - Fri: 7AM - 9PM</p>
+                <p>Sat - Sun: 8AM - 10PM</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
