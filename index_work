@@ -1,1 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonlight Café</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Using Flask-ready static binding as present in your template -->
+   <link rel="stylesheet" href="style.css">
+    <style>
+        /* ==========================================================================
+           ADDITIONAL COMPONENT STYLES (Add these to your style.css or keep here)
+           ========================================================================== */
+        
+        /* Hamburger Menu Icon */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
 
+        .menu-toggle span {
+            width: 100%;
+            height: 2px;
+            background-color: #ffffff;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hamburger Animation when Active */
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Reservation Modal Backdrop */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(20, 17, 15, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Modal Container Box */
+        .modal-box {
+            background-color: #ffffff;
+            width: 90%;
+            max-width: 500px;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transform: translateY(-30px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #7c6e62;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: #c49b66;
+        }
+
+        .modal-box h2 {
+            font-size: 1.8rem;
+            color: #1e1a17;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-box p {
+            color: #7c6e62;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1e1a17;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            border: 1px solid #e6dfd9;
+            background-color: #fbf9f6;
+            border-radius: 8px;
+            color: #2c2520;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #c49b66;
+            background-color: #ffffff;
+        }
+
+        .modal-box .btn.submit {
+            width: 100%;
+            border: none;
+            margin-top: 1rem;
+        }
+
+        /* Mobile Breakpoint Modifications */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            .nav-links {
+                display: flex !important;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: #1e1a17;
+                padding: 6rem 2rem 2rem 2rem;
+                transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+                box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links a {
+                margin: 1.5rem 0 !important;
+                font-size: 1.2rem;
+            }
+            .navbar .btn {
+                display: none; /* Hide primary reservation button on small header configs */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">Moonlight Café</div>
+            
+            <!-- Mobile Menu Toggle Trigger -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Window">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+                <!-- Mobile backup accessibility action inside panel -->
+                <a class="btn open-reserve-modal" style="display: none; background: #c49b66; color: #fff; text-align: center; border:none; margin-top:2rem;" href="#">Reserve a Table</a>
+            </div>
+            
+            <!-- Desktop Action Trigger Call -->
+            <button class="btn open-reserve-modal" style="background: transparent; color: #c49b66; border: 1px solid #c49b66; padding: 0.5rem 1.2rem; font-size: 0.85rem; border-radius: 50px; cursor: pointer;">Reserve a Table</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-text">
+                <p class="tagline">Fresh coffee • Cozy vibes • Warm moments</p>
+                <h1>Welcome to your favorite café spot.</h1>
+                <p>
+                    Sip handcrafted coffee, enjoy homemade pastries, and relax in a warm and welcoming atmosphere.
+                </p>
+                <div class="hero-buttons">
+                    <a class="btn primary" href="#menu">View Menu</a>
+                    <!-- Bind trigger context seamlessly onto structural elements -->
+                    <button class="btn secondary open-reserve-modal" style="border: 2px solid #1e1a17; background: transparent; cursor: pointer;">Book Table</button>
+                </div>
+            </div>
+            <div class="hero-card">
+                <div class="coffee-image"></div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="section-title">
+                <p>About Us</p>
+                <h2>Crafted for coffee lovers</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        At Moonlight Café, we believe every cup should feel special. From slow mornings to
+                        afternoon breaks, our café is designed for comfort, conversation, and connection.
+                    </p>
+                    <p>
+                        We source high-quality beans, bake fresh pastries daily, and create a space where
+                        people can pause, recharge, and enjoy the little moments.
+                    </p>
+                </div>
+
+                <div class="about-info">
+                    <div class="info-box">
+                        <h3>Open Daily</h3>
+                        <p>7:00 AM - 9:00 PM</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Location</h3>
+                        <p>12 Garden Street, Downtown</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Specialty</h3>
+                        <p>Artisan coffee & brunch</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="menu">
+            <div class="section-title">
+                <p>Our Menu</p>
+                <h2>Fresh flavors every day</h2>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <h3>Signature Coffee</h3>
+                    <p>Espresso, cappuccino, latte, mocha</p>
+                    <span>$4.50</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Cold Brews</h3>
+                    <p>Vanilla cream, caramel, hazelnut</p>
+                    <span>$5.00</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Fresh Pastries</h3>
+                    <p>Croissant, muffin, cinnamon roll</p>
+                    <span>$3.50</span>
+                </div>
+
+        
+     
+     
