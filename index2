@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>My Website</title>
+</head>
+<body>
+
+    <!-- PASTE THE DROPDOWN CODE RIGHT HERE -->
+    <div class="dropdown">
+      <button class="dropbtn">Menu ▾</button>
+      <div class="dropdown-content">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+      </div>
+    </div>
+    
+    <style>
+      /* (Keep all the CSS styling code right here too) */
+    </style>
+    <!-- END OF DROPDOWN CODE -->
+
+    <h1>Welcome to My Website</h1>
+    <p>This is the rest of my homepage content...</p>
+
+</body>
+</html>
