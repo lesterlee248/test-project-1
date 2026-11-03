@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moonlight Café</title>
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Using Flask-ready static binding as present in your template -->
+   <link rel="stylesheet" href="style.css">
     <style>
         /* ==========================================================================
-           ADDITIONAL COMPONENT STYLES
-           ========================================================================= */
+           ADDITIONAL COMPONENT STYLES (Add these to your style.css or keep here)
+           ========================================================================== */
         
         /* Hamburger Menu Icon */
         .menu-toggle {
@@ -145,23 +146,10 @@
             background-color: #ffffff;
         }
 
-        /* Form Button Specifics */
-        .modal-box .btn.submit-btn {
+        .modal-box .btn.submit {
             width: 100%;
             border: none;
             margin-top: 1rem;
-            background-color: #1e1a17;
-            color: #ffffff;
-            padding: 0.9rem;
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .modal-box .btn.submit-btn:hover {
-            background-color: #c49b66;
         }
 
         /* Mobile Breakpoint Modifications */
@@ -191,10 +179,7 @@
                 font-size: 1.2rem;
             }
             .navbar .btn {
-                display: none; 
-            }
-            .nav-links .btn.open-reserve-modal {
-                display: block !important;
+                display: none; /* Hide primary reservation button on small header configs */
             }
         }
     </style>
@@ -218,7 +203,7 @@
                 <a href="#gallery">Gallery</a>
                 <a href="#contact">Contact</a>
                 <!-- Mobile backup accessibility action inside panel -->
-                <button class="btn open-reserve-modal" style="display: none; background: #c49b66; color: #fff; text-align: center; border:none; margin-top:2rem; padding: 0.8rem; border-radius: 50px; width: 100%; cursor: pointer;">Reserve a Table</button>
+                <a class="btn open-reserve-modal" style="display: none; background: #c49b66; color: #fff; text-align: center; border:none; margin-top:2rem;" href="#">Reserve a Table</a>
             </div>
             
             <!-- Desktop Action Trigger Call -->
@@ -227,7 +212,6 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-text">
                 <p class="tagline">Fresh coffee • Cozy vibes • Warm moments</p>
@@ -237,7 +221,8 @@
                 </p>
                 <div class="hero-buttons">
                     <a class="btn primary" href="#menu">View Menu</a>
-                    <button class="btn secondary open-reserve-modal" style="border: 2px solid #1e1a17; background: transparent; padding: 0.7rem 1.5rem; border-radius: 50px; font-weight: 500; cursor: pointer;">Book Table</button>
+                    <!-- Bind trigger context seamlessly onto structural elements -->
+                    <button class="btn secondary open-reserve-modal" style="border: 2px solid #1e1a17; background: transparent; cursor: pointer;">Book Table</button>
                 </div>
             </div>
             <div class="hero-card">
@@ -245,7 +230,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="about">
             <div class="section-title">
                 <p>About Us</p>
@@ -258,32 +242,51 @@
                         At Moonlight Café, we believe every cup should feel special. From slow mornings to
                         afternoon breaks, our café is designed for comfort, conversation, and connection.
                     </p>
+                    <p>
+                        We source high-quality beans, bake fresh pastries daily, and create a space where
+                        people can pause, recharge, and enjoy the little moments.
+                    </p>
+                </div>
+ 
+                    <div class="about-info">
+                    <div class="info-box">
+                        <h3>Open Daily</h3>
+                        <p>7:00 AM - 9:00 PM</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Location</h3>
+                        <p>12 Garden Street, Downtown</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Specialty</h3>
+                        <p>Artisan coffee & brunch</p>
+                    </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <!-- Reservation Modal Popup Layer -->
-    <div class="modal-overlay" id="reservationModal">
-        <div class="modal-box">
-            <button class="modal-close" id="closeModal" aria-label="Close Reservation Form">&times;</button>
-            <h2>Book a Table</h2>
-            <p>Save your spot under the moonlight. We look forward to hosting you!</p>
-            
-            <form id="bookingForm" action="#" method="POST">
-                <div class="form-group">
-                    <label for="bookName">Full Name</label>
-                    <input type="text" id="bookName" class="form-control" placeholder="Your name" required>
-                </div>
-                <div class="form-group">
-                    <label for="bookGuests">Number of Guests</label>
-                    <select id="bookGuests" class="form-control" required>
-                        <option value="2">2 People</option>
-                        <option value="3">3 People</option>
-                        <option value="4">4 People</option>
-                        <option value="5">5+ People</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="bookDate">Date</label>
+        <section id="menu" class="menu">
+            <div class="section-title">
+                <p>Our Menu</p>
+                <h2>Fresh flavors every day</h2>
+            </div>
 
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <h3>Signature Coffee</h3>
+                    <p>Espresso, cappuccino, latte, mocha</p>
+                    <span>$4.50</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Cold Brews</h3>
+                    <p>Vanilla cream, caramel, hazelnut</p>
+                    <span>$5.00</span>
+                </div>
+                <div class="menu-item">
+                    <h3>Fresh Pastries</h3>
+                    <p>Croissant, muffin, cinnamon roll</p>
+                    <span>$3.50</span>
+                </div>
+
+        
+      
