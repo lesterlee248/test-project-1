@@ -226,5 +226,50 @@
                 });
 
                 const individualLinks = navLinks.querySelectorAll('a');
-        
+       individualLinks.forEach(link => {
+link.addEventListener('click', () => {
+menuToggle.classList.remove('active');
+navLinks.classList.remove('active');
+});
+});
+}
+// Modal controller infrastructure
+const modalOverlay = document.getElementById('reserveModal');
+const openModalButtons = document.querySelectorAll('.open-reserve-modal');
+const closeModalButton = document.getElementById('closeModal');
+const openModal = (e) => {
+if (e) e.preventDefault();
+if (modalOverlay) {
+modalOverlay.classList.add('active');
+document.body.style.overflow = 'hidden';
+}
+};
+const closeModal = () => {
+if (modalOverlay) {
+modalOverlay.classList.remove('active');
+document.body.style.overflow = '';
+}
+};
+openModalButtons.forEach(button => {
+button.addEventListener('click', openModal);
+});
+if (closeModalButton) {
+closeModalButton.addEventListener('click', closeModal);
+}
+if (modalOverlay) {
+modalOverlay.addEventListener('click', (e) => {
+if (e.target === modalOverlay) {
+closeModal();
+}
+});
+window.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+closeModal();
+}
+});
+}
+});
+
+
+ 
       
