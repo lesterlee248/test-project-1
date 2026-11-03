@@ -118,6 +118,12 @@ section {
     letter-spacing: 0.5px;
 }
 
+
+.nav-links {
+    margin-right: auto;   /* This moves the menu links to the left */
+    padding-left: 4rem;   /* This keeps a nice space between the logo and "Home" */
+}
+
 .nav-links a {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
