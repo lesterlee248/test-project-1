@@ -42,7 +42,7 @@
                 <p>Sip handcrafted coffee, enjoy homemade pastries, and relax in a warm and welcoming atmosphere.</p>
                 <div class="hero-buttons">
                     <a class="btn primary" href="#menu">View Menu</a>
-                    <button class="btn secondary open-reserve-modal">Book Table</button>
+                    <button type="button" class="btn secondary open-reserve-modal">Book Table</button>
                 </div>
             </div>
             <div class="hero-card">
@@ -226,7 +226,6 @@
                 openModalButtons.forEach(button => {
                     button.addEventListener('click', (e) => {
                         e.preventDefault();
-                        e.stopPropagation();
                         modalOverlay.classList.add('active');
                         modalOverlay.style.opacity = "1";
                         modalOverlay.style.pointerEvents = "auto";
