@@ -121,7 +121,7 @@ section {
 
 .nav-links {
     margin-right: auto;   /* This moves the menu links to the left */
-    padding-left: 10rem;   /* This keeps a nice space between the logo and "Home" */
+    padding-left: 15rem;   /* This keeps a nice space between the logo and "Home" */
 }
 
 .nav-links a {
