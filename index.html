@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moonlight Café</title>
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,7 +29,7 @@
                 <a class="btn open-reserve-modal mobile-reserve-btn" href="#">Reserve a Table</a>
             </div>
             
-          <!--<button class="btn open-reserve-modal desktop-reserve-btn">Reserve a Table</button>-->
+            <button class="btn open-reserve-modal desktop-reserve-btn">Reserve a Table</button>
         </nav>
     </header>
 
@@ -118,7 +118,8 @@
             </div>
         </section>
 
-        <!-- Gallery Section -->
+
+            <!-- Gallery Section -->
         <section id="gallery" class="gallery">
             <div class="section-title">
                 <p>Gallery</p>
@@ -182,7 +183,7 @@
         </div>
     </footer>
 
-    <!-- Reservation Modal Container -->
+    <!-- Reservation Modal Structure -->
     <div class="modal-overlay" id="reserveModal">
         <div class="modal-box">
             <button class="modal-close" id="closeModal" aria-label="Close Reservation Overlay">&times;</button>
@@ -206,18 +207,52 @@
                     <label for="resGuests">Guests</label>
                     <input type="number" id="resGuests" class="form-control" min="1" max="10" value="2" required>
                 </div>
-                <button type="submit" class="btn primary submit">Confirm Reservation</button>
+                <button type="submit" class="btn primary submit" style="background: #c49b66; color: #fff; padding: 0.8rem; border-radius: 8px; width: 100%; border: none; cursor: pointer;">Confirm Reservation</button>
             </form>
         </div>
     </div>
 
-    <!-- Interaction Script Logic -->
+    <!-- Script Block Mechanics -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Mobile navigation menu triggers
+            const modalOverlay = document.getElementById('reserveModal');
+            const openModalButtons = document.querySelectorAll('.open-reserve-modal');
+            const closeModalButton = document.getElementById('closeModal');
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
 
+            // Open Modal Control
+            if (openModalButtons.length > 0 && modalOverlay) {
+                openModalButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        modalOverlay.classList.add('active');
+                        modalOverlay.style.opacity = "1";
+                        modalOverlay.style.pointerEvents = "auto";
+                        document.body.style.overflow = 'hidden';
+                    });
+                });
+            }
+
+            // Close Modal Control
+            const closeModal = () => {
+                if (modalOverlay) {
+                    modalOverlay.classList.remove('active');
+                    modalOverlay.style.opacity = "0";
+                    modalOverlay.style.pointerEvents = "none";
+                    document.body.style.overflow = '';
+                }
+            };
+
+            if (closeModalButton) closeModalButton.addEventListener('click', closeModal);
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', (e) => {
+                    if (e.target === modalOverlay) closeModal();
+                });
+            }
+
+            // Mobile Menu Control
             if (menuToggle && navLinks) {
                 menuToggle.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -226,50 +261,15 @@
                 });
 
                 const individualLinks = navLinks.querySelectorAll('a');
-       individualLinks.forEach(link => {
-link.addEventListener('click', () => {
-menuToggle.classList.remove('active');
-navLinks.classList.remove('active');
-});
-});
-}
-// Modal controller infrastructure
-const modalOverlay = document.getElementById('reserveModal');
-const openModalButtons = document.querySelectorAll('.open-reserve-modal');
-const closeModalButton = document.getElementById('closeModal');
-const openModal = (e) => {
-if (e) e.preventDefault();
-if (modalOverlay) {
-modalOverlay.classList.add('active');
-document.body.style.overflow = 'hidden';
-}
-};
-const closeModal = () => {
-if (modalOverlay) {
-modalOverlay.classList.remove('active');
-document.body.style.overflow = '';
-}
-};
-openModalButtons.forEach(button => {
-button.addEventListener('click', openModal);
-});
-if (closeModalButton) {
-closeModalButton.addEventListener('click', closeModal);
-}
-if (modalOverlay) {
-modalOverlay.addEventListener('click', (e) => {
-if (e.target === modalOverlay) {
-closeModal();
-}
-});
-window.addEventListener('keydown', (e) => {
-if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-closeModal();
-}
-});
-}
-});
-
-
- 
-      
+                individualLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menuToggle.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+    
