@@ -26,7 +26,6 @@
                 <a href="#menu">Menu</a>
                 <a href="#gallery">Gallery</a>
                 <a href="#contact">Contact</a>
-               <!-- <a class="btn open-reserve-modal mobile-reserve-btn" href="#">Reserve a Table</a> -->
             </div>
             
             <button class="btn open-reserve-modal desktop-reserve-btn">Reserve a Table</button>
@@ -117,6 +116,7 @@
                 </div>
             </div>
         </section>
+
         <!-- Gallery Section -->
         <section id="gallery" class="gallery">
             <div class="section-title">
@@ -181,9 +181,6 @@
         </div>
     </footer>
 
-    <!-- Hidden iframe so submission background-posts to Google Forms without leaving page -->
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){ alert('Reservation confirmed! We look forward to seeing you at Moonlight Café.'); location.reload(); }"></iframe>
-
     <!-- Reservation Modal Structure -->
     <div class="modal-overlay" id="reserveModal">
         <div class="modal-box">
@@ -191,52 +188,38 @@
             <h2>Reserve a Table</h2>
             <p>Book your cozy spot at Moonlight Café.</p>
 
-            <form id="reservationForm" action="https://docs.google.com/forms/u/0/d/e/YOUR_GOOGLE_FORM_ID/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-                <!-- 1. Full Name -->
+            <form id="reservationForm" onsubmit="submitReservation(event)">
                 <div class="form-group">
                     <label for="resName">Full Name</label>
-                    <input type="text" id="resName" name="entry.11111111" class="form-control" placeholder="John Doe" required>
+                    <input type="text" id="resName" name="name" class="form-control" placeholder="John Doe" required>
                 </div>
-
-                <!-- 2. Email Address -->
                 <div class="form-group">
                     <label for="resEmail">Email Address</label>
-                    <input type="email" id="resEmail" name="entry.55555555" class="form-control" placeholder="john@example.com" required>
+                    <input type="email" id="resEmail" name="email" class="form-control" placeholder="john@example.com" required>
                 </div>
-
-                <!-- 3. Phone Number -->
                 <div class="form-group">
                     <label for="resPhone">Phone Number</label>
-                    <input type="tel" id="resPhone" name="entry.66666666" class="form-control" placeholder="+65 9123 4567" required>
+                    <input type="tel" id="resPhone" name="phone" class="form-control" placeholder="+65 9123 4567" required>
                 </div>
-
-                <!-- 4. Date -->
                 <div class="form-group">
                     <label for="resDate">Date</label>
-                    <input type="date" id="resDate" name="entry.22222222" class="form-control" required>
+                    <input type="date" id="resDate" name="date" class="form-control" required>
                 </div>
-
-                <!-- 5. Time Slot -->
                 <div class="form-group">
                     <label for="resTime">Time Slot</label>
-                    <input type="time" id="resTime" name="entry.33333333" class="form-control" required>
+                    <input type="time" id="resTime" name="time" class="form-control" required>
                 </div>
-
-                <!-- 6. Guests -->
                 <div class="form-group">
                     <label for="resGuests">Guests</label>
-                    <input type="number" id="resGuests" name="entry.44444444" class="form-control" min="1" max="10" value="2" required>
+                    <input type="number" id="resGuests" name="guests" class="form-control" min="1" max="10" value="2" required>
                 </div>
-
-                <button type="submit" class="btn primary submit" style="background: #c49b66; color: #fff; padding: 0.8rem; border-radius: 8px; width: 100%; border: none; cursor: pointer;">Confirm Reservation</button>
+                <button type="submit" id="submitBtn" class="btn primary submit" style="background: #c49b66; color: #fff; padding: 0.8rem; border-radius: 8px; width: 100%; border: none; cursor: pointer;">Confirm Reservation</button>
             </form>
         </div>
     </div>
 
     <!-- Script Block Mechanics -->
     <script>
-        let submitted = false;
-
         document.addEventListener('DOMContentLoaded', () => {
             const modalOverlay = document.getElementById('reserveModal');
             const openModalButtons = document.querySelectorAll('.open-reserve-modal');
@@ -244,7 +227,6 @@
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
 
-            // Open Modal Control
             if (openModalButtons.length > 0 && modalOverlay) {
                 openModalButtons.forEach(button => {
                     button.addEventListener('click', (e) => {
@@ -257,7 +239,6 @@
                 });
             }
 
-            // Close Modal Control
             const closeModal = () => {
                 if (modalOverlay) {
                     modalOverlay.classList.remove('active');
@@ -274,7 +255,6 @@
                 });
             }
 
-            // Mobile Menu Control
             if (menuToggle && navLinks) {
                 menuToggle.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -291,7 +271,6 @@
                 });
             }
 
-            // Contact Form handler (Prevents 405 error on static form)
             const contactForm = document.querySelector('.contact-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', (e) => {
@@ -301,6 +280,57 @@
                 });
             }
         });
+
+        // Google Sheets Reservation Submission Function
+        async function submitReservation(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+
+            const formData = {
+                name: document.getElementById('resName').value,
+                email: document.getElementById('resEmail').value,
+                phone: document.getElementById('resPhone').value,
+                date: document.getElementById('resDate').value,
+                time: document.getElementById('resTime').value,
+                guests: document.getElementById('resGuests').value
+            };
+
+            try {
+                // Replace 'YOUR_WEB_APP_URL_HERE' with your actual Google Apps Script Web App URL
+                const webAppUrl = 'YOUR_WEB_APP_URL_HERE';
+
+                const response = await fetch(webAppUrl, {
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    alert('Reservation confirmed! We look forward to seeing you at Moonlight Café.');
+                    document.getElementById('reservationForm').reset();
+                    
+                    const modalOverlay = document.getElementById('reserveModal');
+                    if (modalOverlay) {
+                        modalOverlay.classList.remove('active');
+                        modalOverlay.style.opacity = "0";
+                        modalOverlay.style.pointerEvents = "none";
+                        document.body.style.overflow = '';
+                    }
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to submit reservation. Please check your connection.');
+            } finally {
+                submitBtn.textContent = 'Confirm Reservation';
+                submitBtn.disabled = false;
+            }
+        }
     </script>
 </body>
 </html>
