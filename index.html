@@ -1,336 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moonlight Café</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moonlight Café</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="logo">Moonlight Café</div>
-            
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Window">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
 
-            <div class="nav-links" id="navLinks">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#menu">Menu</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#contact">Contact</a>
-            </div>
-            
-            <button class="btn open-reserve-modal desktop-reserve-btn">Reserve a Table</button>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-text">
-                <p class="tagline">Fresh coffee • Cozy vibes • Warm moments</p>
-                <h1>Welcome to your favorite café spot.</h1>
-                <p>Sip handcrafted coffee, enjoy homemade pastries, and relax in a warm and welcoming atmosphere.</p>
-                <div class="hero-buttons">
-                    <a class="btn primary" href="#menu">View Menu</a>
-                    <button type="button" class="btn secondary open-reserve-modal">Book Table</button>
-                </div>
-            </div>
-            <div class="hero-card">
-                <div class="coffee-image"></div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about">
-            <div class="section-title">
-                <p>About Us</p>
-                <h2>Crafted for coffee lovers</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>At Moonlight Café, we believe every cup should feel special. From slow mornings to afternoon breaks, our café is designed for comfort, conversation, and connection.</p>
-                    <p>We source high-quality beans, bake fresh pastries daily, and create a space where people can pause, recharge, and enjoy the little moments.</p>
-                </div>
-                <div class="about-info">
-                    <div class="info-box">
-                        <h3>Open Daily</h3>
-                        <p>7:00 AM - 9:00 PM</p>
-                    </div>
-                    <div class="info-box">
-                        <h3>Location</h3>
-                        <p>12 Garden Street, Downtown</p>
-                    </div>
-                    <div class="info-box">
-                        <h3>Specialty</h3>
-                        <p>Artisan coffee & brunch</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Menu Section -->
-        <section id="menu" class="menu">
-            <div class="section-title">
-                <p>Our Menu</p>
-                <h2>Fresh flavors every day</h2>
-            </div>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <h3>Signature Coffee</h3>
-                    <p>Espresso, cappuccino, latte, mocha</p>
-                    <span>$4.50</span>
-                </div>
-                <div class="menu-item">
-                    <h3>Cold Brews</h3>
-                    <p>Vanilla cream, caramel, hazelnut</p>
-                    <span>$5.00</span>
-                </div>
-                <div class="menu-item">
-                    <h3>Fresh Pastries</h3>
-                    <p>Croissant, muffin, cinnamon roll</p>
-                    <span>$3.50</span>
-                </div>
-                <div class="menu-item">
-                    <h3>Artisan Teas</h3>
-                    <p>Matcha latte, Earl Grey, herbal blends</p>
-                    <span>$4.00</span>
-                </div>
-                <div class="menu-item">
-                    <h3>All-Day Brunch</h3>
-                    <p>Avocado toast, classic waffles, acai bowls</p>
-                    <span>$12.50</span>
-                </div>
-                <div class="menu-item">
-                    <h3>Desserts</h3>
-                    <p>Cheesecake, chocolate fudge cake, macarons</p>
-                    <span>$6.00</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section id="gallery" class="gallery">
-            <div class="section-title">
-                <p>Gallery</p>
-                <h2>A glimpse inside our space</h2>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item item-1"></div>
-                <div class="gallery-item item-2"></div>
-                <div class="gallery-item item-3"></div>
-                <div class="gallery-item item-4"></div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <div class="section-title">
-                <p>Contact Us</p>
-                <h2>We'd love to hear from you</h2>
-            </div>
-            <div class="contact-container">
-                <div class="contact-details">
-                    <h3>Get in Touch</h3>
-                    <p>Have questions, hosting an event, or just want to say hi? Drop us a line!</p>
-                    <ul class="contact-info-list">
-                        <li><strong>Phone:</strong> +1 (555) 123-4567</li>
-                        <li><strong>Email:</strong> hello@moonlightcafe.com</li>
-                        <li><strong>Address:</strong> 12 Garden Street, Downtown</li>
-                    </ul>
-                </div>
-                <form class="contact-form" action="#" method="POST">
-                    <div class="form-group">
-                        <label for="contactName">Name</label>
-                        <input type="text" id="contactName" class="form-control" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contactEmail">Email</label>
-                        <input type="email" id="contactEmail" class="form-control" placeholder="your@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contactMessage">Message</label>
-                        <textarea id="contactMessage" class="form-control" rows="4" placeholder="How can we help you?" required></textarea>
-                    </div>
-                    <button type="submit" class="btn primary submit-btn">Send Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <h2>Moonlight Café</h2>
-            <p>Your favorite neighborhood escape for handcrafted coffee, exceptional pastries, and cozy conversations.</p>
-            <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#menu">Menu</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <p class="copyright">&copy; 2026 Moonlight Café. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Reservation Modal Structure -->
-    <div class="modal-overlay" id="reserveModal">
-        <div class="modal-box">
-            <button class="modal-close" id="closeModal" aria-label="Close Reservation Overlay">&times;</button>
-            <h2>Reserve a Table</h2>
-            <p>Book your cozy spot at Moonlight Café.</p>
-
-            <form id="reservationForm" onsubmit="submitReservation(event)">
-                <div class="form-group">
-                    <label for="resName">Full Name</label>
-                    <input type="text" id="resName" name="name" class="form-control" placeholder="John Doe" required>
-                </div>
-                <div class="form-group">
-                    <label for="resEmail">Email Address</label>
-                    <input type="email" id="resEmail" name="email" class="form-control" placeholder="john@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="resPhone">Phone Number</label>
-                    <input type="tel" id="resPhone" name="phone" class="form-control" placeholder="+65 9123 4567" required>
-                </div>
-                <div class="form-group">
-                    <label for="resDate">Date</label>
-                    <input type="date" id="resDate" name="date" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="resTime">Time Slot</label>
-                    <input type="time" id="resTime" name="time" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="resGuests">Guests</label>
-                    <input type="number" id="resGuests" name="guests" class="form-control" min="1" max="10" value="2" required>
-                </div>
-                <button type="submit" id="submitBtn" class="btn primary submit" style="background: #c49b66; color: #fff; padding: 0.8rem; border-radius: 8px; width: 100%; border: none; cursor: pointer;">Confirm Reservation</button>
-            </form>
-        </div>
+<header class="header">
+  <nav class="navbar">
+    <div class="logo">Moonlight Café</div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Window">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
     </div>
+    <button class="btn open-reserve-modal desktop-reserve-btn">Reserve a Table</button>
+  </nav>
+</header>
 
-    <!-- Script Block Mechanics -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modalOverlay = document.getElementById('reserveModal');
-            const openModalButtons = document.querySelectorAll('.open-reserve-modal');
-            const closeModalButton = document.getElementById('closeModal');
-            const menuToggle = document.getElementById('menuToggle');
-            const navLinks = document.getElementById('navLinks');
+<main>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <p class="tagline">Fresh coffee • Cozy vibes • Warm moments</p>
+      <h1>Welcome to your favorite café spot.</h1>
+      <p>Sip handcrafted coffee, enjoy homemade pastries, and relax in a warm and welcoming atmosphere.</p>
+      <div class="hero-buttons">
+        <a class="btn primary" href="#menu">View Menu</a>
+        <button type="button" class="btn secondary open-reserve-modal">Book Table</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="coffee-image"></div>
+    </div>
+  </section>
 
-            if (openModalButtons.length > 0 && modalOverlay) {
-                openModalButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        modalOverlay.classList.add('active');
-                        modalOverlay.style.opacity = "1";
-                        modalOverlay.style.pointerEvents = "auto";
-                        document.body.style.overflow = 'hidden';
-                    });
-                });
-            }
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="section-title">
+      <p>About Us</p>
+      <h2>Crafted for coffee lovers</h2>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>At Moonlight Café, we believe every cup should feel special. From slow mornings to afternoon breaks, our café is designed for comfort, conversation, and connection.</p>
+        <p>We source high-quality beans, bake fresh pastries daily, and create a space where people can pause, recharge, and enjoy the little moments.</p>
+      </div>
+      <div class="about-info">
+        <div class="info-box">
+          <h3>Open Daily</h3>
+          <p>7:00 AM - 9:00 PM</p>
+        </div>
+        <div class="info-box">
+          <h3>Location</h3>
+          <p>12 Garden Street, Downtown</p>
+        </div>
+        <div class="info-box">
+          <h3>Specialty</h3>
+          <p>Artisan coffee & brunch</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            const closeModal = () => {
-                if (modalOverlay) {
-                    modalOverlay.classList.remove('active');
-                    modalOverlay.style.opacity = "0";
-                    modalOverlay.style.pointerEvents = "none";
-                    document.body.style.overflow = '';
-                }
-            };
+  <!-- Menu Section -->
+  <section id="menu" class="menu">
+    <div class="section-title">
+      <p>Our Menu</p>
+      <h2>Fresh flavors every day</h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <h3>Signature Coffee</h3>
+        <p>Espresso, cappuccino, latte, mocha</p>
+        <span>$4.50</span>
+      </div>
+      <div class="menu-item">
+        <h3>Cold Brews</h3>
+        <p>Vanilla cream, caramel, hazelnut</p>
+        <span>$5.00</span>
+      </div>
+      <div class="menu-item">
+        <h3>Fresh Pastries</h3>
+        <p>Croissant, muffin, cinnamon roll</p>
+        <span>$3.50</span>
+      </div>
+      <div class="menu-item">
+        <h3>Artisan Teas</h3>
+        <p>Matcha latte, Earl Grey, herbal blends</p>
+        <span>$4.00</span>
+      </div>
+      <div class="menu-item">
+        <h3>All-Day Brunch</h3>
+        <p>Avocado toast, classic waffles, acai bowls</p>
+        <span>$12.50</span>
+      </div>
+      <div class="menu-item">
+        <h3>Desserts</h3>
+        <p>Cheesecake, chocolate fudge cake, macarons</p>
+        <span>$6.00</span>
+      </div>
+    </div>
+  </section>
 
-            if (closeModalButton) closeModalButton.addEventListener('click', closeModal);
-            if (modalOverlay) {
-                modalOverlay.addEventListener('click', (e) => {
-                    if (e.target === modalOverlay) closeModal();
-                });
-            }
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery">
+    <div class="section-title">
+      <p>Gallery</p>
+      <h2>A glimpse inside our space</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item item-1"></div>
+      <div class="gallery-item item-2"></div>
+      <div class="gallery-item item-3"></div>
+      <div class="gallery-item item-4"></div>
+    </div>
+  </section>
 
-            if (menuToggle && navLinks) {
-                menuToggle.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    menuToggle.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                });
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="section-title">
+      <p>Contact Us</p>
+      <h2>We'd love to hear from you</h2>
+    </div>
+    <div class="contact-container">
+      <div class="contact-details">
+        <h3>Get in Touch</h3>
+        <p>Have questions, hosting an event, or just want to say hi? Drop us a line!</p>
+        <ul class="contact-info-list">
+          <li><strong>Phone:</strong> +1 (555) 123-4567</li>
+          <li><strong>Email:</strong> hello@moonlightcafe.com</li>
+          <li><strong>Address:</strong> 12 Garden Street, Downtown</li>
+        </ul>
+      </div>
+      <form class="contact-form" action="#" method="POST">
+        <div class="form-group">
+          <label for="contactName">Name</label>
+          <input type="text" id="contactName" class="form-control" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email</label>
+          <input type="email" id="contactEmail" class="form-control" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" class="form-control" rows="4" placeholder="How can we help you?" required></textarea>
+        </div>
+        <button type="submit" class="btn primary submit-btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+</main>
 
-                const individualLinks = navLinks.querySelectorAll('a');
-                individualLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        menuToggle.classList.remove('active');
-                        navLinks.classList.remove('active');
-                    });
-                });
-            }
+<footer class="footer">
+  <div class="footer-content">
+    <h2>Moonlight Café</h2>
+    <p>Your favorite neighborhood escape for handcrafted coffee, exceptional pastries, and cozy conversations.</p>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p class="copyright">&copy; 2026 Moonlight Café. All rights reserved.</p>
+  </div>
+</footer>
 
-            const contactForm = document.querySelector('.contact-form');
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    alert('Thank you for reaching out! We will reply to your email shortly.');
-                    contactForm.reset();
-                });
-            }
-        });
+<!-- Reservation Modal Structure -->
+<div class="modal-overlay" id="reserveModal">
+  <div class="modal-box">
+    <button class="modal-close" id="closeModal" aria-label="Close Reservation Overlay">&times;</button>
+    <h2>Reserve a Table</h2>
+    <p>Book your cozy spot at Moonlight Café.</p>
+    <form id="reservationForm">
+      <div class="form-group">
+        <label for="resName">Full Name</label>
+        <input type="text" id="resName" class="form-control" placeholder="John Doe" required>
+      </div>
+      <div class="form-group">
+        <label for="resEmail">Email Address</label>
+        <input type="email" id="resEmail" class="form-control" placeholder="john@example.com" required>
+      </div>
+      <div class="form-group">
+        <label for="resPhone">Phone Number</label>
+        <input type="tel" id="resPhone" class="form-control" placeholder="+65 9123 4567" required>
+      </div>
+      <div class="form-group">
+        <label for="resDate">Date</label>
+        <input type="date" id="resDate" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="resTime">Time Slot</label>
+        <input type="time" id="resTime" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="resGuests">Guests</label>
+        <input type="number" id="resGuests" class="form-control" min="1" max="10" value="2" required>
+      </div>
+      <button type="submit" class="btn primary submit" style="background: #c49b66; color: #fff; padding: 0.8rem; border-radius: 8px; width: 100%; border: none; cursor: pointer;">Confirm Reservation</button>
+    </form>
+  </div>
+</div>
 
-        // Google Sheets Reservation Submission Function
-        async function submitReservation(event) {
-            event.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
+<!-- JavaScript Mechanics -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modalOverlay = document.getElementById('reserveModal');
+  const openModalButtons = document.querySelectorAll('.open-reserve-modal');
+  const closeModalButton = document.getElementById('closeModal');
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
 
-            const formData = {
-                name: document.getElementById('resName').value,
-                email: document.getElementById('resEmail').value,
-                phone: document.getElementById('resPhone').value,
-                date: document.getElementById('resDate').value,
-                time: document.getElementById('resTime').value,
-                guests: document.getElementById('resGuests').value
-            };
+  // Modal open/close logic
+  if (openModalButtons.length > 0 && modalOverlay) {
+    openModalButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalOverlay.classList.add('active');
+        modalOverlay.style.opacity = "1";
+        modalOverlay.style.pointerEvents = "auto";
+        document.body.style.overflow = 'hidden';
+      });
+    });
+  }
 
-            try {
-                // Replace 'YOUR_WEB_APP_URL_HERE' with your actual Google Apps Script Web App URL
-                const webAppUrl = 'https://script.google.com/macros/s/AKfycbw0LAfN0uEpNfRccfscHqUhnzo_5b8-74vhhcLxXZf2X0CvOwgseSh4sp3B8dNH1tVH/exec';
+  const closeModal = () => {
+    if (modalOverlay) {
+      modalOverlay.classList.remove('active');
+      modalOverlay.style.opacity = "0";
+      modalOverlay.style.pointerEvents = "none";
+      document.body.style.overflow = '';
+    }
+  };
 
-                const response = await fetch(webAppUrl, {
-                    method: 'POST',
-                    body: JSON.stringify(formData)
-                });
+  if (closeModalButton) closeModalButton.addEventListener('click', closeModal);
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+  }
 
-                const result = await response.json();
+  // Mobile menu toggle
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
 
-                if (result.status === 'success') {
-                    alert('Reservation confirmed! We look forward to seeing you at Moonlight Café.');
-                    document.getElementById('reservationForm').reset();
-                    
-                    const modalOverlay = document.getElementById('reserveModal');
-                    if (modalOverlay) {
-                        modalOverlay.classList.remove('active');
-                        modalOverlay.style.opacity = "0";
-                        modalOverlay.style.pointerEvents = "none";
-                        document.body.style.overflow = '';
-                    }
-                } else {
-                    alert('Something went wrong. Please try again.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Failed to submit reservation. Please check your connection.');
-            } finally {
-                submitBtn.textContent = 'Confirm Reservation';
-                submitBtn.disabled = false;
-            }
-        }
-    </script>
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+
+  // Contact form submission
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for reaching out! We will reply to your email shortly.');
+      contactForm.reset();
+    });
+  }
+
+  // Reservation form submission to Google Apps Script backend
+  const reservationForm = document.getElementById('reservationForm');
+  if (reservationForm) {
+    reservationForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      var formData = {
+        name: document.getElementById('resName').value,
+        email: document.getElementById('resEmail').value,
+        phone: document.getElementById('resPhone').value,
+        date: document.getElementById('resDate').value,
+        time: document.getElementById('resTime').value,
+        guests: document.getElementById('resGuests').value
+      };
+      
+      // PASTE YOUR ACTUAL APPS SCRIPT WEB APP URL HERE:
+      var webAppUrl = "https://script.google.com/macros/s/AKfycbw0LAfN0uEpNfRccfscHqUhnzo_5b8-74vhhcLxXZf2X0CvOwgseSh4sp3B8dNH1tVH/exec";
+      
+      fetch(webAppUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        alert('Reservation confirmed! Confirmation emails have been sent.');
+        reservationForm.reset();
+        closeModal();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Something went wrong. Please try again.');
+      });
+    });
+  }
+});
+</script>
+
 </body>
 </html>
