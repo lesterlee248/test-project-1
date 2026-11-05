@@ -6,7 +6,7 @@
 <title>Moonlight Café</title>
 <link rel="preconnect" href="https://googleapis.com">
 <link rel="preconnect" href="https://gstatic.com" crossorigin>
-<link href="https://googleapis.com" rel="stylesheet">
+<link href="https://googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -214,8 +214,7 @@
     </form>
   </div>
 </div>
-
- <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   const modalOverlay = document.getElementById('reserveModal');
   const openModalButtons = document.querySelectorAll('.open-reserve-modal');
@@ -223,10 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
   
-  // PASTE YOUR LIVE APPS SCRIPT EXEC URL ENDPOINT HERE:
-  const webAppUrl = "https://script.google.com/macros/s/AKfycbw0LAfN0uEpNfRccfscHqUhnzo_5b8-74vhhcLxXZf2X0CvOwgseSh4sp3B8dNH1tVH/exec";
+  // Your live system deployment Google Script URL 
+  const webAppUrl = "https://google.com";
 
-  // Modal screen transition activation controls
+  // Modal toggle routines
   if (openModalButtons.length > 0 && modalOverlay) {
     openModalButtons.forEach(button => {
       button.addEventListener('click', (e) => {
@@ -255,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Mobile menu layout slider control logic
+  // Mobile navigation slider logic
   if (menuToggle && navLinks) {
     menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -271,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Pipeline A: Reservation Form Submission Router
+  // Pipeline A: Dynamic URL Parameters Reservation submission
   const reservationForm = document.getElementById('reservationForm');
   if (reservationForm) {
     reservationForm.addEventListener('submit', function(e) {
@@ -280,20 +279,19 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
       submitBtn.innerText = "Processing...";
       
-      var formData = {
-        name: document.getElementById('resName').value,
-        email: document.getElementById('resEmail').value,
-        phone: document.getElementById('resPhone').value,
-        date: document.getElementById('resDate').value,
-        time: document.getElementById('resTime').value,
-        guests: document.getElementById('resGuests').value
-      };
+      var name = encodeURIComponent(document.getElementById('resName').value);
+      var email = encodeURIComponent(document.getElementById('resEmail').value);
+      var phone = encodeURIComponent(document.getElementById('resPhone').value);
+      var date = encodeURIComponent(document.getElementById('resDate').value);
+      var time = encodeURIComponent(document.getElementById('resTime').value);
+      var guests = encodeURIComponent(document.getElementById('resGuests').value);
       
-      fetch(webAppUrl, {
+      // Data passed directly through request URL to guarantee no-cors delivery
+      var dynamicUrl = webAppUrl + "?name=" + name + "&email=" + email + "&phone=" + phone + "&date=" + date + "&time=" + time + "&guests=" + guests;
+      
+      fetch(dynamicUrl, {
         method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        mode: "no-cors"
       })
       .then(() => {
         alert('Reservation confirmed! Confirmation emails have been sent.');
@@ -301,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal();
       })
       .catch(error => {
-        console.error('Error submitting reservation info:', error);
+        console.error('Error:', error);
         alert('Something went wrong. Please try again.');
       })
       .finally(() => {
@@ -311,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Pipeline B: Contact Form Submission Router
+  // Pipeline B: Dynamic URL Parameters Contact Form Submission
   const contactForm = document.querySelector('.contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
@@ -320,25 +318,22 @@ document.addEventListener('DOMContentLoaded', () => {
       contactSubmitBtn.disabled = true;
       contactSubmitBtn.innerText = "Sending...";
 
-      var contactData = {
-        name: document.getElementById('contactName').value,
-        email: document.getElementById('contactEmail').value,
-        isContactMessage: true,
-        message: document.getElementById('contactMessage').value
-      };
+      var name = encodeURIComponent(document.getElementById('contactName').value);
+      var email = encodeURIComponent(document.getElementById('contactEmail').value);
+      var message = encodeURIComponent(document.getElementById('contactMessage').value);
+      
+      var dynamicUrl = webAppUrl + "?name=" + name + "&email=" + email + "&message=" + message + "&isContactMessage=true";
 
-      fetch(webAppUrl, {
+      fetch(dynamicUrl, {
         method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactData)
+        mode: "no-cors"
       })
       .then(() => {
         alert('Thank you for reaching out! We will reply to your email shortly.');
         contactForm.reset();
       })
       .catch(error => {
-        console.error('Error transmitting contact information packet:', error);
+        console.error('Error:', error);
         alert('Transmission failed. Please try again.');
       })
       .finally(() => {
@@ -351,4 +346,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
- 
