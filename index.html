@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moonlight Café</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://googleapis.com" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -145,7 +145,7 @@
           <li><strong>Address:</strong> 12 Garden Street, Downtown</li>
         </ul>
       </div>
-      <form class="contact-form" action="#" method="POST">
+      <form class="contact-form">
         <div class="form-group">
           <label for="contactName">Name</label>
           <input type="text" id="contactName" class="form-control" placeholder="Your Name" required>
@@ -158,7 +158,7 @@
           <label for="contactMessage">Message</label>
           <textarea id="contactMessage" class="form-control" rows="4" placeholder="How can we help you?" required></textarea>
         </div>
-        <button type="submit" class="btn primary submit-btn">Send Message</button>
+        <button type="submit" id="contactSubmitBtn" class="btn primary submit-btn">Send Message</button>
       </form>
     </div>
   </section>
@@ -179,7 +179,7 @@
   </div>
 </footer>
 
-<!-- Reservation Modal Structure -->
+<!-- Upgraded Reservation Modal Structure -->
 <div class="modal-overlay" id="reserveModal">
   <div class="modal-box">
     <button class="modal-close" id="closeModal" aria-label="Close Reservation Overlay">&times;</button>
@@ -210,21 +210,23 @@
         <label for="resGuests">Guests</label>
         <input type="number" id="resGuests" class="form-control" min="1" max="10" value="2" required>
       </div>
-      <button type="submit" class="btn primary submit" style="background: #c49b66; color: #fff; padding: 0.8rem; border-radius: 8px; width: 100%; border: none; cursor: pointer;">Confirm Reservation</button>
+      <button type="submit" id="resSubmitBtn" class="btn primary submit" style="background: #c49b66; color: #fff; padding: 0.8rem; border-radius: 8px; width: 100%; border: none; cursor: pointer;">Confirm Reservation</button>
     </form>
   </div>
 </div>
 
-<!-- JavaScript Mechanics -->
-<script>
+ <script>
 document.addEventListener('DOMContentLoaded', () => {
   const modalOverlay = document.getElementById('reserveModal');
   const openModalButtons = document.querySelectorAll('.open-reserve-modal');
   const closeModalButton = document.getElementById('closeModal');
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
+  
+  // PASTE YOUR LIVE APPS SCRIPT EXEC URL ENDPOINT HERE:
+  const webAppUrl = "https://script.google.com/macros/s/AKfycbw0LAfN0uEpNfRccfscHqUhnzo_5b8-74vhhcLxXZf2X0CvOwgseSh4sp3B8dNH1tVH/exec";
 
-  // Modal open/close logic
+  // Modal screen transition activation controls
   if (openModalButtons.length > 0 && modalOverlay) {
     openModalButtons.forEach(button => {
       button.addEventListener('click', (e) => {
@@ -253,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Mobile menu toggle
+  // Mobile menu layout slider control logic
   if (menuToggle && navLinks) {
     menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -269,21 +271,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Contact form submission
-  const contactForm = document.querySelector('.contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Thank you for reaching out! We will reply to your email shortly.');
-      contactForm.reset();
-    });
-  }
-
-  // Reservation form submission to Google Apps Script backend
+  // Pipeline A: Reservation Form Submission Router
   const reservationForm = document.getElementById('reservationForm');
   if (reservationForm) {
     reservationForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      const submitBtn = document.getElementById('resSubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Processing...";
       
       var formData = {
         name: document.getElementById('resName').value,
@@ -294,30 +289,66 @@ document.addEventListener('DOMContentLoaded', () => {
         guests: document.getElementById('resGuests').value
       };
       
-      // PASTE YOUR ACTUAL APPS SCRIPT WEB APP URL HERE:
-      var webAppUrl = "https://script.google.com/macros/s/AKfycbw0LAfN0uEpNfRccfscHqUhnzo_5b8-74vhhcLxXZf2X0CvOwgseSh4sp3B8dNH1tVH/exec";
-      
       fetch(webAppUrl, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
       })
-      .then(response => {
+      .then(() => {
         alert('Reservation confirmed! Confirmation emails have been sent.');
         reservationForm.reset();
         closeModal();
       })
       .catch(error => {
-        console.error('Error:', error);
+        console.error('Error submitting reservation info:', error);
         alert('Something went wrong. Please try again.');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Confirm Reservation";
+      });
+    });
+  }
+
+  // Pipeline B: Contact Form Submission Router
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const contactSubmitBtn = document.getElementById('contactSubmitBtn');
+      contactSubmitBtn.disabled = true;
+      contactSubmitBtn.innerText = "Sending...";
+
+      var contactData = {
+        name: document.getElementById('contactName').value,
+        email: document.getElementById('contactEmail').value,
+        isContactMessage: true,
+        message: document.getElementById('contactMessage').value
+      };
+
+      fetch(webAppUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactData)
+      })
+      .then(() => {
+        alert('Thank you for reaching out! We will reply to your email shortly.');
+        contactForm.reset();
+      })
+      .catch(error => {
+        console.error('Error transmitting contact information packet:', error);
+        alert('Transmission failed. Please try again.');
+      })
+      .finally(() => {
+        contactSubmitBtn.disabled = false;
+        contactSubmitBtn.innerText = "Send Message";
       });
     });
   }
 });
 </script>
-
 </body>
 </html>
+ 
